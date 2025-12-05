@@ -3,6 +3,28 @@
 Booktopia is a personal reading-companion app designed to help readers rebuild (or elevate) their reading habit through **AI-powered personalization**, a **visual fantasy-themed journey**, and **social motivation**.  
 It combines recommendations, progress tracking, insight-taking, and a playful RPG-style progression system to make reading meaningful and fun again.
 
+## 🚀 Quick Start
+
+```bash
+# 1. Set up and start the backend
+cd backend
+python -m venv venv
+.\venv\Scripts\activate  # Windows: .\venv\Scripts\activate
+pip install -r requirements.txt
+# Configure .env file (see SETUP_GUIDE.md)
+python run.py
+
+# 2. Set up and start the frontend (new terminal)
+cd frontend
+npm install
+# Configure .env.local file (see SETUP_GUIDE.md)
+npm run dev
+```
+
+**📖 For detailed setup instructions, see [SETUP_GUIDE.md](./SETUP_GUIDE.md)**
+
+**🗄️ For Supabase configuration, see [SUPABASE_SETUP.md](./SUPABASE_SETUP.md)**
+
 ---
 
 ## 🎯 Vision & Goals
@@ -89,28 +111,94 @@ A minimalist reading timer to:
 
 ---
 
-## 🧱 Tech Overview (Draft)
-**Frontend:** React Native / Next.js (decision pending)  
-**Backend:** Node.js or Python FastAPI  
-**Database:** Postgres + Vector DB (Pinecone/Weaviate/pgvector)  
-**AI:**  
-- OpenAI GPT models  
-- Custom RAG pipeline for book research  
-- Embedding-based insight linking  
-- Avatar progression logic
+## 🧱 Tech Stack
 
-(These are flexible for early prototyping.)
+### Frontend
+- **Vite + React + TypeScript**
+- **Tailwind CSS** + shadcn/ui for styling
+- **React Router** for navigation
+- **TanStack Query** (React Query) for data fetching
+- **Supabase JS** for authentication
+- **Zustand** for state management (optional)
+
+### Backend
+- **FastAPI** (Python async web framework)
+- **Pydantic v2** for data validation
+- **SQLAlchemy** (async) for database ORM
+- **Supabase** for authentication & database
+- **pgvector** for AI embeddings
+
+### Database
+- **Supabase Postgres** with pgvector extension
+- Row Level Security (RLS) enabled
+- Vector similarity search for AI features
+
+### AI/LLM
+- **Hugging Face** open-source models (initial)
+  - Text: Mistral-7B-Instruct
+  - Embeddings: all-MiniLM-L6-v2
+- Swappable provider architecture (OpenAI support ready)
+- Custom RAG pipeline for recommendations
 
 ---
 
-## 🚀 Project Objectives (1-Week Sprint Version)
-In one week, the goal is to build a functional MVP that includes:
-- Basic onboarding & preferences  
-- Simple book recommendation prototype  
-- Reading session tracking  
-- Minimal journey page placeholder  
-- Basic AI notes/insights prototype  
-- Clean UI structure for future expansion  
+## 📂 Project Structure
+
+```
+Booktopia/
+├── frontend/          # React + TypeScript app
+│   ├── src/
+│   │   ├── api/      # API client functions
+│   │   ├── components/ # React components
+│   │   ├── hooks/    # Custom hooks
+│   │   ├── lib/      # Utilities (Supabase, API)
+│   │   ├── pages/    # Page components
+│   │   └── types/    # TypeScript definitions
+│   └── package.json
+│
+├── backend/           # FastAPI Python app
+│   ├── app/
+│   │   ├── core/     # Config & auth
+│   │   ├── db/       # Database setup
+│   │   ├── llm/      # AI/LLM clients
+│   │   ├── models/   # Database models
+│   │   ├── routers/  # API endpoints
+│   │   ├── schemas/  # Pydantic schemas
+│   │   └── services/ # Business logic
+│   ├── run.py
+│   └── requirements.txt
+│
+├── ai/                # AI layer documentation
+│   ├── llm_client.py  # Protocol definition
+│   └── README.md      # AI architecture docs
+│
+├── supabase_setup.sql # Database schema
+├── SETUP_GUIDE.md     # Complete setup instructions
+├── SUPABASE_SETUP.md  # Supabase configuration
+├── CONTEXT.md         # Project architecture & guidelines
+└── README.md          # This file
+```
+
+---
+
+## 🧪 Current MVP Status
+
+✅ **Completed:**
+- Project structure and architecture
+- Frontend with React + TypeScript + Tailwind
+- Backend with FastAPI + async SQLAlchemy
+- Supabase authentication setup
+- AI/LLM abstraction layer
+- Database schema with pgvector
+- Row Level Security policies
+- API client and auth hooks
+
+🚧 **In Progress:**
+- Book recommendation endpoint
+- Reading session tracking
+- Notes with AI summarization
+- User profile management
+- Fantasy avatar progression system
 
 ---
 
